@@ -1,9 +1,13 @@
 .PHONY: up down restart logs build init
 
+-include .env
+export
+
 DOCKER_COMPOSE = podman-compose
 
 up:
-	DOMAIN=$(DOMAIN) $(DOCKER_COMPOSE) up -d --build
+	$(DOCKER_COMPOSE) build
+	$(DOCKER_COMPOSE) up -d
 
 down:
 	$(DOCKER_COMPOSE) down

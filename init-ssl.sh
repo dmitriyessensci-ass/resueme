@@ -40,7 +40,10 @@ echo "[init] Ждём готовности nginx (5 сек)..."
 sleep 5
 
 echo "[init] Запрашиваем сертификат у Let's Encrypt..."
-podman-compose run --rm certbot certonly \
+podman run --rm \
+    -v "$(pwd)/nginx/certbot/conf:/etc/letsencrypt" \
+    -v "$(pwd)/nginx/certbot/www:/var/www/certbot" \
+    certbot/certbot certonly \
     --webroot \
     --webroot-path=/var/www/certbot \
     --email "$EMAIL" \
