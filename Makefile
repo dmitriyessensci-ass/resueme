@@ -1,9 +1,9 @@
-.PHONY: up down restart logs build
+.PHONY: up down restart logs build init
 
 DOCKER_COMPOSE = sudo -u rooteball docker-compose
 
 up:
-	$(DOCKER_COMPOSE) up -d --build
+	DOMAIN=$(DOMAIN) $(DOCKER_COMPOSE) up -d --build
 
 down:
 	$(DOCKER_COMPOSE) down
@@ -16,3 +16,8 @@ logs:
 
 build:
 	$(DOCKER_COMPOSE) build --no-cache
+
+# Первый запуск с получением SSL-сертификата
+# Использование: make init DOMAIN=resume.example.com EMAIL=you@example.com
+init:
+	DOMAIN=$(DOMAIN) EMAIL=$(EMAIL) ./init-ssl.sh

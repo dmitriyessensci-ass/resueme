@@ -4,3 +4,5 @@ __pycache__/
 *.pyo
 *.pdf
 .claude/
+nginx/certbot/conf/
+nginx/logs/
