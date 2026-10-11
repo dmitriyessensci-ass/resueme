@@ -1,6 +1,6 @@
 .PHONY: up down restart logs build init
 
-DOCKER_COMPOSE = sudo -u rooteball docker-compose
+DOCKER_COMPOSE = podman-compose
 
 up:
 	DOMAIN=$(DOMAIN) $(DOCKER_COMPOSE) up -d --build
