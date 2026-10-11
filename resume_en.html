@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dmitriy Tarasov — Lead DevOps Engineer</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --accent: #1a56db;
+    --accent-light: #e8f0fe;
+    --text: #1a1a2e;
+    --muted: #5f6368;
+    --border: #e0e0e0;
+    --bg: #ffffff;
+    --tag-bg: #f0f4ff;
+    --tag-text: #1a56db;
+  }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 48px;
+  }
+
+  /* HEADER */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: start;
+    margin-bottom: 32px;
+    padding-bottom: 28px;
+    border-bottom: 2px solid var(--accent);
+  }
+
+  .header-name h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text);
+    line-height: 1.1;
+  }
+
+  .header-name .title {
+    font-size: 16px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  .header-name .subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .header-contacts {
+    text-align: right;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .header-contacts a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .header-contacts a:hover {
+    text-decoration: underline;
+  }
+
+  /* SUMMARY */
+  .summary {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 32px;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: #2d3748;
+  }
+
+  /* SECTIONS */
+  .section {
+    margin-bottom: 28px;
+  }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin-bottom: 14px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* EXPERIENCE */
+  .job {
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .job:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .job-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: baseline;
+    margin-bottom: 2px;
+  }
+
+  .job-company {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .job-period {
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    font-weight: 500;
+  }
+
+  .job-role-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .job-role {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .job-duration {
+    font-size: 11.5px;
+    color: var(--muted);
+    background: #f5f5f5;
+    padding: 1px 8px;
+    border-radius: 10px;
+  }
+
+  .job ul {
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .job ul li {
+    padding: 2px 0 2px 16px;
+    position: relative;
+    font-size: 13px;
+    color: #333;
+  }
+
+  .job ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 11px;
+    top: 4px;
+  }
+
+  /* SKILLS GRID */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 8px 16px;
+    align-items: start;
+  }
+
+  .skill-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding-top: 3px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .tag {
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 2px 10px;
+    border-radius: 12px;
+    border: 1px solid #c7d7fc;
+  }
+
+  /* TWO COLUMN BOTTOM */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  /* EDUCATION */
+  .edu-item {
+    margin-bottom: 8px;
+  }
+
+  .edu-school {
+    font-weight: 600;
+    font-size: 13.5px;
+  }
+
+  .edu-degree {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .edu-year {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* LANGUAGES */
+  .lang-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  .lang-item:last-child { border-bottom: none; }
+
+  .lang-level {
+    font-size: 12px;
+    color: var(--muted);
+    background: #f5f5f5;
+    padding: 1px 9px;
+    border-radius: 10px;
+  }
+
+  .lang-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 100;
+  }
+
+  .lang-switcher a {
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--muted);
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .lang-switcher a.active {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .lang-switcher a:hover:not(.active) {
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+
+  @media print {
+    body { padding: 24px 32px; }
+    .lang-switcher { display: none; }
+    .job { page-break-inside: avoid; }
+    .section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="lang-switcher">
+  <a href="/en" class="active">EN</a>
+  <a href="/ru">RU</a>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-name">
+    <h1>Dmitriy Tarasov</h1>
+    <div class="title">Lead DevOps Engineer</div>
+    <div class="subtitle">5+ years of experience &nbsp;·&nbsp; Remote &nbsp;·&nbsp; Open to relocation</div>
+  </div>
+  <div class="header-contacts">
+    <div>+7 (926) 842-53-98</div>
+    <div><a href="mailto:dmitriytarasov122@gmail.com">dmitriytarasov122@gmail.com</a></div>
+    <div>Telegram: <a href="https://t.me/AlexDofamin">@AlexDofamin</a></div>
+    <div><a href="https://www.linkedin.com/in/dmitriytarasov-01a4153bb">LinkedIn</a></div>
+    <div style="margin-top:4px; color:#999">Moscow, Russia</div>
+  </div>
+</header>
+
+<!-- SUMMARY -->
+<div class="summary">
+  Lead DevOps Engineer with 5+ years of hands-on experience designing, deploying, and securing large-scale infrastructure. Expert in building Kubernetes clusters from scratch (vanilla, HA, GPU-enabled), implementing GitOps and secrets management (Vault + SOPS + ESO), and integrating DevSecOps into CI/CD pipelines. Proven track record leading infrastructure modernization at government-scale organizations, supporting fleets of 1,400+ servers, and driving MLOps adoption. Comfortable owning the full lifecycle from bare-metal to production-ready cloud-native deployments.
+</div>
+
+<!-- EXPERIENCE -->
+<section class="section">
+  <div class="section-title">Experience</div>
+
+  <!-- Job 1 -->
+  <div class="job">
+    <div class="job-header">
+      <div class="job-company">Astratech (AO ASTRATECH)</div>
+      <div class="job-period">May 2026 — Present</div>
+    </div>
+    <div class="job-role-line">
+      <span class="job-role">Lead DevOps Engineer</span>
+      <span class="job-duration">6 months · Argentina</span>
+    </div>
+    <ul>
+      <li>Administered multi-cloud environments: Yandex Cloud, AWS, Azure — provisioning VMs, VPCs, storage, managed services.</li>
+      <li><strong>Kubernetes (vanilla) from scratch:</strong> deployed and configured HA multi-master clusters (n workers + GPU nodes) both manually (kubeadm) and via IaC (Kubespray + Terraform); performed cluster hardening (RBAC, NetworkPolicy, PodSecurity, audit logging, CIS benchmarks) and rolling version upgrades — both hands-on and through IaC.</li>
+      <li><strong>Secrets management at scale:</strong> implemented HashiCorp Vault + SOPS + External Secrets Operator (ESO) in HA mode end-to-end (zero → production-ready); set up Vault with Kubernetes auth method and AppRole; integrated secrets pipeline across <strong>17 repositories and 47 Kubernetes clusters</strong>.</li>
+      <li><strong>Application migration to K8s:</strong> containerized and migrated bare-metal, Docker, and systemctl-managed workloads (Node.js, Python, Go, Rust) to Kubernetes — wrote Dockerfiles, authored Helm charts, configured resource limits/requests, readiness/liveness probes, HPA; carried projects from development stage through production-ready launch.</li>
+      <li><strong>GitOps (ArgoCD):</strong> rolled out GitOps from zero across all environments (test → staging → prod); configured ApplicationSets, sync waves, health checks, and automated rollback policies.</li>
+      <li><strong>CI/CD + DevSecOps:</strong> built and maintained pipelines (GitLab CI, Jenkins, GitHub Actions); embedded SAST (Semgrep, Bandit), SCA (Trivy + Harbor), image scanning, and quality gates directly into CI stages.</li>
+      <li><strong>MLOps:</strong> maintained GPU-enabled K8s nodes with NVIDIA device plugin; integrated Kubeflow and ClearML for ML pipeline orchestration and model lifecycle management.</li>
+      <li>Automated build and deployment pipelines for polyglot services (Go, Rust, Node.js, Python); collaborated with dev teams to ensure smooth production rollouts and service reliability.</li>
+    </ul>
+  </div>
+
+  <!-- Job 2 -->
+  <div class="job">
+    <div class="job-header">
+      <div class="job-company">MICC — Ministry of Culture of the Russian Federation (ФГБУ ГИВЦ)</div>
+      <div class="job-period">Apr 2024 — May 2026</div>
+    </div>
+    <div class="job-role-line">
+      <span class="job-role">Lead DevOps Engineer</span>
+      <span class="job-duration">2 yrs 2 mos · Moscow</span>
+    </div>
+    <ul>
+      <li><strong>Infrastructure migration (import substitution):</strong> modernized and migrated government systems from bare-metal to Kubernetes — greenfield cluster deployments from scratch alongside legacy system support; decommissioned EOL products and replaced with modern, supported alternatives.</li>
+      <li><strong>Kubernetes cluster fleet:</strong> provisioned large numbers of clusters (test + prod) via Kubespray and IaC; each cluster configured with baseline hardening (RBAC, audit logging, network policies), integrated monitoring and centralized logging from day one.</li>
+      <li><strong>GitOps rollout from zero:</strong> introduced GitOps (ArgoCD) into production, implemented deployment gates, progressive delivery approaches, and automated sync policies; covered full resource lifecycle from test to production.</li>
+      <li><strong>IaC & CI/CD:</strong> automated infrastructure management via Ansible (roles, playbooks, AWX); built Jenkins pipelines for Docker/Helm-based delivery; standardized cluster provisioning and configuration across environments.</li>
+      <li><strong>Security & compliance:</strong> conducted vulnerability audits and remediation per FSTEC BDU requirements; performed cluster hardening; integrated DevSecOps pipeline — SAST (SonarQube, Semgrep, Bandit, eslint, pylint), SCA (Trivy + Harbor), DAST (PTAF).</li>
+      <li><strong>Observability for hybrid environments:</strong> built full observability stacks (USE/RED methodology) spanning Kubernetes, Docker, and bare-metal: Prometheus Operator, Grafana, Alertmanager, VictoriaMetrics, ELK Stack, Graylog.</li>
+      <li><strong>MLOps:</strong> deployed Kubeflow from scratch; developed and maintained ML pipelines; managed GPU resource lifecycle (device plugins, quotas, scheduling); supported legacy ML infrastructure.</li>
+      <li>Led DevOps team of 3 engineers: sprint planning, maintenance window scheduling, task tracking.</li>
+    </ul>
+  </div>
+
+  <!-- Job 3 -->
+  <div class="job">
+    <div class="job-header">
+      <div class="job-company">LLC Radial (ООО "Фирма Радиал")</div>
+      <div class="job-period">Apr 2022 — Oct 2024</div>
+    </div>
+    <div class="job-role-line">
+      <span class="job-role">DevOps Engineer</span>
+      <span class="job-duration">2 yrs 7 mos · Moscow</span>
+    </div>
+    <ul>
+      <li>Deep Ubuntu/Linux system administration: kernel tuning, package management, OS hardening, high-availability server configuration.</li>
+      <li>Infrastructure as Code: Terraform for infrastructure provisioning (state management, modules, providers); Ansible for configuration management and automated policy enforcement.</li>
+      <li>Built observability stack: Prometheus + Node Exporter for metrics collection (CPU, RAM, Disk, Network); Grafana dashboards for trend analysis and incident detection; centralized log aggregation with parsing and storage.</li>
+    </ul>
+  </div>
+
+  <!-- Job 4 -->
+  <div class="job">
+    <div class="job-header">
+      <div class="job-company">Rostec State Corporation</div>
+      <div class="job-period">Aug 2023 — Jun 2024</div>
+    </div>
+    <div class="job-role-line">
+      <span class="job-role">IT Infrastructure Administrator</span>
+      <span class="job-duration">11 mos · Moscow</span>
+    </div>
+    <ul>
+      <li>Full-cycle RHEL server infrastructure administration for enterprise environments; ensured service stability for 30–40 users.</li>
+      <li>Developed Python automation utilities (compiled to standalone executables via PyInstaller) to eliminate manual routine operations.</li>
+      <li>Deployed and maintained containerized microservices using Docker and Docker Compose.</li>
+      <li>Administered PostgreSQL, MySQL, and Redis: tuning, replication, backup, and recovery.</li>
+      <li>Configured observability stack (USE methodology): Prometheus, Node Exporter, Zabbix (with custom scripts), Grafana; monitoring network devices and services.</li>
+    </ul>
+  </div>
+
+  <!-- Job 5 -->
+  <div class="job">
+    <div class="job-header">
+      <div class="job-company">LLC Krotech (ООО Кротэк)</div>
+      <div class="job-period">Feb 2024 — Apr 2024</div>
+    </div>
+    <div class="job-role-line">
+      <span class="job-role">DevOps / System Administrator</span>
+      <span class="job-duration">3 mos · Moscow</span>
+    </div>
+    <ul>
+      <li>Managed full lifecycle of test environments across heterogeneous UNIX systems: CentOS 6–9, Ubuntu, openSUSE, RHEL, Astra Linux/MosOS.</li>
+      <li>Developed modular Ansible roles for server configuration, software installation, and environment standardization.</li>
+      <li>Configured CI pipelines in GitLab CI and Jenkins; managed Redis in high-load distributed environments.</li>
+      <li>Built alerting and incident routing via Prometheus + Alertmanager (USE methodology); minimized MTTR.</li>
+    </ul>
+  </div>
+
+  <!-- Job 6 -->
+  <div class="job">
+    <div class="job-header">
+      <div class="job-company">FSAI RCUD &amp; RT — Federal Agency under Ministry of Industry and Trade</div>
+      <div class="job-period">Aug 2021 — Aug 2023</div>
+    </div>
+    <div class="job-role-line">
+      <span class="job-role">Lead ML / Software Engineer</span>
+      <span class="job-duration">2 yrs 1 mo · Moscow</span>
+    </div>
+    <ul>
+      <li>Python ML developer at a government research agency; applied data science and data analysis methodologies.</li>
+      <li>Solved computer vision tasks: image segmentation, classification, OCR, super-resolution, and object detection.</li>
+      <li>Wrote annotation and data-processing pipelines; built a FastAPI + React web app for visualization and automatic image labeling.</li>
+      <li>Worked with specialized tools: QuPath, Matlab (medical thumbnail interaction), Deep Zoom (DZI) for image preprocessing and tiling, GeoJSON.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section">
+  <div class="section-title">Technical Skills</div>
+  <div class="skills-grid">
+
+    <div class="skill-label">Cloud & OS</div>
+    <div class="skill-tags">
+      <span class="tag">Yandex Cloud</span>
+      <span class="tag">AWS</span>
+      <span class="tag">Azure</span>
+      <span class="tag">RHEL</span>
+      <span class="tag">Ubuntu</span>
+      <span class="tag">SUSE</span>
+      <span class="tag">Astra Linux</span>
+    </div>
+
+    <div class="skill-label">Kubernetes</div>
+    <div class="skill-tags">
+      <span class="tag">Kubernetes (vanilla)</span>
+      <span class="tag">Kubeadm</span>
+      <span class="tag">Kubespray</span>
+      <span class="tag">Helm</span>
+      <span class="tag">ArgoCD</span>
+      <span class="tag">Istio</span>
+      <span class="tag">Nginx Ingress</span>
+      <span class="tag">Traefik</span>
+    </div>
+
+    <div class="skill-label">IaC & CI/CD</div>
+    <div class="skill-tags">
+      <span class="tag">Terraform</span>
+      <span class="tag">Ansible</span>
+      <span class="tag">AWX</span>
+      <span class="tag">GitLab CI/CD</span>
+      <span class="tag">Jenkins</span>
+      <span class="tag">GitHub Actions</span>
+    </div>
+
+    <div class="skill-label">Secrets & Security</div>
+    <div class="skill-tags">
+      <span class="tag">Vault (HA)</span>
+      <span class="tag">SOPS</span>
+      <span class="tag">ESO</span>
+      <span class="tag">SonarQube</span>
+      <span class="tag">Trivy</span>
+      <span class="tag">Harbor</span>
+      <span class="tag">Semgrep</span>
+      <span class="tag">Bandit</span>
+    </div>
+
+    <div class="skill-label">Containers</div>
+    <div class="skill-tags">
+      <span class="tag">Docker</span>
+      <span class="tag">Docker Compose</span>
+      <span class="tag">Kaniko</span>
+      <span class="tag">kind</span>
+    </div>
+
+    <div class="skill-label">Observability</div>
+    <div class="skill-tags">
+      <span class="tag">Prometheus</span>
+      <span class="tag">Grafana</span>
+      <span class="tag">Alertmanager</span>
+      <span class="tag">VictoriaMetrics</span>
+      <span class="tag">ELK Stack</span>
+      <span class="tag">Graylog</span>
+      <span class="tag">Zabbix</span>
+      <span class="tag">USE/RED</span>
+    </div>
+
+    <div class="skill-label">Databases</div>
+    <div class="skill-tags">
+      <span class="tag">PostgreSQL</span>
+      <span class="tag">MongoDB</span>
+      <span class="tag">Redis</span>
+      <span class="tag">ClickHouse</span>
+      <span class="tag">RabbitMQ</span>
+      <span class="tag">MySQL</span>
+    </div>
+
+    <div class="skill-label">MLOps</div>
+    <div class="skill-tags">
+      <span class="tag">Kubeflow</span>
+      <span class="tag">ClearML</span>
+      <span class="tag">GPU cluster management</span>
+    </div>
+
+    <div class="skill-label">Languages</div>
+    <div class="skill-tags">
+      <span class="tag">Python</span>
+      <span class="tag">Go</span>
+      <span class="tag">Bash</span>
+      <span class="tag">Groovy</span>
+      <span class="tag">Rust (support)</span>
+      <span class="tag">Node.js (support)</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- BOTTOM: EDUCATION + LANGUAGES -->
+<div class="two-col">
+  <section class="section">
+    <div class="section-title">Education</div>
+    <div class="edu-item">
+      <div class="edu-school">Moscow Power Engineering Institute (MEI)</div>
+      <div class="edu-degree">Information Security — Engineering & Economics</div>
+      <div class="edu-year">2019 – 2022 (Incomplete — entered workforce)</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">Languages</div>
+    <div class="lang-item">
+      <span>Russian</span>
+      <span class="lang-level">Native</span>
+    </div>
+    <div class="lang-item">
+      <span>English</span>
+      <span class="lang-level">B2 — Upper-Intermediate</span>
+    </div>
+  </section>
+</div>
+
+</body>
+</html>

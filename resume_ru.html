@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тарасов Дмитрий — Lead DevOps Engineer</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --accent: #1a56db;
+    --accent-light: #e8f0fe;
+    --text: #1a1a2e;
+    --muted: #5f6368;
+    --border: #e0e0e0;
+    --bg: #ffffff;
+    --tag-bg: #f0f4ff;
+    --tag-text: #1a56db;
+  }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 48px;
+  }
+
+  .lang-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 100;
+  }
+
+  .lang-switcher a {
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--muted);
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .lang-switcher a.active {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .lang-switcher a:hover:not(.active) {
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: start;
+    margin-bottom: 32px;
+    padding-bottom: 28px;
+    border-bottom: 2px solid var(--accent);
+  }
+
+  .header-name h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text);
+    line-height: 1.1;
+  }
+
+  .header-name .title {
+    font-size: 16px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  .header-name .subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .header-contacts {
+    text-align: right;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .header-contacts a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .header-contacts a:hover { text-decoration: underline; }
+
+  .summary {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 32px;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: #2d3748;
+  }
+
+  .section { margin-bottom: 28px; }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin-bottom: 14px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .job {
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .job:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .job-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: baseline;
+    margin-bottom: 2px;
+  }
+
+  .job-company { font-size: 15px; font-weight: 700; color: var(--text); }
+
+  .job-period { font-size: 12px; color: var(--muted); white-space: nowrap; font-weight: 500; }
+
+  .job-role-line { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+
+  .job-role { font-size: 13px; font-weight: 600; color: var(--accent); }
+
+  .job-duration {
+    font-size: 11.5px;
+    color: var(--muted);
+    background: #f5f5f5;
+    padding: 1px 8px;
+    border-radius: 10px;
+  }
+
+  .job ul { padding-left: 0; list-style: none; }
+
+  .job ul li {
+    padding: 2px 0 2px 16px;
+    position: relative;
+    font-size: 13px;
+    color: #333;
+  }
+
+  .job ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 11px;
+    top: 4px;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 8px 16px;
+    align-items: start;
+  }
+
+  .skill-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding-top: 3px;
+  }
+
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+  .tag {
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 2px 10px;
+    border-radius: 12px;
+    border: 1px solid #c7d7fc;
+  }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+  .edu-item { margin-bottom: 8px; }
+  .edu-school { font-weight: 600; font-size: 13.5px; }
+  .edu-degree { font-size: 13px; color: var(--muted); }
+  .edu-year { font-size: 12px; color: var(--muted); }
+
+  .lang-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  .lang-item:last-child { border-bottom: none; }
+
+  .lang-level {
+    font-size: 12px;
+    color: var(--muted);
+    background: #f5f5f5;
+    padding: 1px 9px;
+    border-radius: 10px;
+  }
+
+  @media print {
+    body { padding: 24px 32px; }
+    .lang-switcher { display: none; }
+    .job { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="lang-switcher">
+  <a href="/en">EN</a>
+  <a href="/ru" class="active">RU</a>
+</div>
+
+<header class="header">
+  <div class="header-name">
+    <h1>Тарасов Дмитрий</h1>
+    <div class="title">Ведущий DevOps-инженер</div>
+    <div class="subtitle">5+ лет опыта &nbsp;·&nbsp; Удалённо &nbsp;·&nbsp; Готов к релокации</div>
+  </div>
+  <div class="header-contacts">
+    <div>+7 (926) 842-53-98</div>
+    <div><a href="mailto:dmitriytarasov122@gmail.com">dmitriytarasov122@gmail.com</a></div>
+    <div>Telegram: <a href="https://t.me/AlexDofamin">@AlexDofamin</a></div>
+    <div><a href="https://www.linkedin.com/in/dmitriytarasov-01a4153bb">LinkedIn</a></div>
+    <div style="margin-top:4px; color:#999">Москва, Россия</div>
+  </div>
+</header>
+
+<div class="summary">
+  Ведущий DevOps-инженер с 5+ годами практического опыта проектирования, развёртывания и защиты крупномасштабной инфраструктуры. Экспертиза в построении Kubernetes-кластеров с нуля (vanilla, HA, GPU-узлы), внедрении GitOps и управления секретами (Vault + SOPS + ESO), интеграции DevSecOps в CI/CD-пайплайны. Подтверждённый опыт руководства модернизацией инфраструктуры в организациях государственного масштаба, поддержки парка из 1400+ серверов и внедрения MLOps. Полный цикл: от bare-metal до production-ready cloud-native деплоя.
+</div>
+
+<section class="section">
+  <div class="section-title">Опыт работы</div>
+
+  <div class="job">
+    <div class="job-header">
+      <div class="job-company">АО АСТРАТЕХ (Astratech)</div>
+      <div class="job-period">Май 2026 — настоящее время</div>
+    </div>
+    <div class="job-role-line">
+      <span class="job-role">Lead DevOps Engineer</span>
+      <span class="job-duration">6 месяцев · Аргентина</span>
+    </div>
+    <ul>
+      <li>Администрирование мультиоблачных сред: Yandex Cloud, AWS, Azure — провижининг ВМ, VPC, хранилищ, управляемых сервисов.</li>
+      <li><strong>Kubernetes (vanilla) с нуля:</strong> развёртывание и настройка HA multi-master кластеров (n workers + GPU-узлы) вручную (kubeadm) и через IaC (Kubespray + Terraform); харденинг кластеров (RBAC, NetworkPolicy, PodSecurity, audit logging, CIS-бенчмарки) и rolling-обновления — как руками, так и через IaC.</li>
+      <li><strong>Управление секретами в масштабе:</strong> внедрение HashiCorp Vault + SOPS + External Secrets Operator (ESO) в HA-режиме от нуля до production-ready; настройка Vault с Kubernetes auth method и AppRole; интеграция пайплайна секретов в <strong>17 репозиториев и 47 Kubernetes-кластеров</strong>.</li>
+      <li><strong>Миграция приложений в K8s:</strong> контейнеризация и перенос bare-metal, Docker и systemctl-приложений (Node.js, Python, Go, Rust) в Kubernetes — написание Dockerfile, разработка Helm-чартов, настройка resource limits/requests, readiness/liveness probes, HPA; сопровождение от стадии разработки до production-ready запуска.</li>
+      <li><strong>GitOps (ArgoCD):</strong> раскатка GitOps с нуля по всем средам (test → staging → prod); настройка ApplicationSets, sync waves, health checks и политик автоматического отката.</li>
+      <li><strong>CI/CD + DevSecOps:</strong> построение и поддержка пайплайнов (GitLab CI, Jenkins, GitHub Actions); встраивание SAST (Semgrep, Bandit), SCA (Trivy + Harbor), сканирования образов и quality gates в CI-стадии.</li>
+      <li><strong>MLOps:</strong> поддержка GPU-узлов K8s с NVIDIA device plugin; интеграция Kubeflow и ClearML для оркестрации ML-пайплайнов и управления жизненным циклом моделей.</li>
+      <li>Автоматизация сборки и деплоя полиглот-сервисов (Go, Rust, Node.js, Python); взаимодействие с командами разработки для обеспечения надёжных production-деплоев.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-header">
+      <div class="job-company">ФГБУ ГИВЦ Минкультуры России</div>
+      <div class="job-period">Апр 2024 — Май 2026</div>
+    </div>
+    <div class="job-role-line">
+      <span class="job-role">Lead DevOps Engineer</span>
+      <span class="job-duration">2 года 2 мес · Москва</span>
+    </div>
+    <ul>
+      <li><strong>Миграция инфраструктуры (импортозамещение):</strong> модернизация и перенос государственных систем с bare-metal на Kubernetes — развёртывание кластеров с нуля с параллельной поддержкой legacy; вывод из эксплуатации EOL-продуктов с заменой на современные аналоги.</li>
+      <li><strong>Флот Kubernetes-кластеров:</strong> провижининг большого количества кластеров (тест + прод) через Kubespray и IaC; каждый кластер сконфигурирован с базовым харденингом (RBAC, audit logging, network policies), интегрированным мониторингом и централизованным логированием с первого дня.</li>
+      <li><strong>GitOps с нуля:</strong> внедрение GitOps (ArgoCD) в production, настройка deployment gates, прогрессивного деплоя и политик автоматической синхронизации; полный lifecycle ресурсов от теста до прода.</li>
+      <li><strong>IaC и CI/CD:</strong> автоматизация управления инфраструктурой через Ansible (роли, плейбуки, AWX); построение Jenkins-пайплайнов для Docker/Helm-поставки; стандартизация провижининга и конфигурации кластеров.</li>
+      <li><strong>Безопасность и соответствие требованиям:</strong> аудит и устранение уязвимостей по ФСТЭК БДУ; харденинг кластеров; интеграция DevSecOps-пайплайна — SAST (SonarQube, Semgrep, Bandit, eslint, pylint), SCA (Trivy + Harbor), DAST (ПТАФ).</li>
+      <li><strong>Observability для гибридных сред:</strong> построение полных стеков наблюдаемости (методология USE/RED) для Kubernetes, Docker и bare-metal: Prometheus Operator, Grafana, Alertmanager, VictoriaMetrics, ELK Stack, Graylog.</li>
+      <li><strong>MLOps:</strong> развёртывание Kubeflow с нуля; разработка и поддержка ML-пайплайнов; управление lifecycle GPU-ресурсов (device plugins, квоты, шедулинг); поддержка legacy ML-инфраструктуры.</li>
+      <li>Руководство DevOps-командой из 3 инженеров: планирование спринтов, рабочих окон, трекинг задач.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-header">
+      <div class="job-company">ООО «Фирма Радиал»</div>
+      <div class="job-period">Апр 2022 — Окт 2024</div>
+    </div>
+    <div class="job-role-line">
+      <span class="job-role">DevOps Engineer</span>
+      <span class="job-duration">2 года 7 мес · Москва</span>
+    </div>
+    <ul>
+      <li>Глубокое системное администрирование Ubuntu/Linux: тюнинг ядра, управление пакетами, харденинг ОС, настройка отказоустойчивости серверов.</li>
+      <li>Infrastructure as Code: Terraform для провижининга инфраструктуры (state management, модули, провайдеры); Ansible для конфигурационного управления и автоматического применения политик безопасности.</li>
+      <li>Построение стека наблюдаемости: Prometheus + Node Exporter для сбора метрик (CPU, RAM, Disk, Network); Grafana-дашборды для анализа трендов и выявления инцидентов; централизованный сбор, парсинг и хранение логов.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-header">
+      <div class="job-company">Государственная корпорация Ростех</div>
+      <div class="job-period">Авг 2023 — Июн 2024</div>
+    </div>
+    <div class="job-role-line">
+      <span class="job-role">Администратор информационных систем</span>
+      <span class="job-duration">11 мес · Москва</span>
+    </div>
+    <ul>
+      <li>Полное сопровождение серверной инфраструктуры RHEL для корпоративных сред; обеспечение стабильности сервисов для 30–40 пользователей.</li>
+      <li>Разработка утилит автоматизации рабочих мест на Python (компиляция в standalone-приложения через PyInstaller) для устранения ручных рутинных операций.</li>
+      <li>Развёртывание и поддержка контейнеризированных микросервисов с использованием Docker и Docker Compose.</li>
+      <li>Администрирование PostgreSQL, MySQL, Redis: тюнинг, репликация, резервное копирование и восстановление.</li>
+      <li>Настройка стека наблюдаемости (методология USE): Prometheus, Node Exporter, Zabbix (с кастомными скриптами), Grafana; мониторинг сетевых устройств и сервисов.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-header">
+      <div class="job-company">ООО Кротэк</div>
+      <div class="job-period">Фев 2024 — Апр 2024</div>
+    </div>
+    <div class="job-role-line">
+      <span class="job-role">Системный администратор / DevOps</span>
+      <span class="job-duration">3 мес · Москва</span>
+    </div>
+    <ul>
+      <li>Управление полным жизненным циклом тестовых стендов на гетерогенных UNIX-системах: CentOS 6–9, Ubuntu, openSUSE, RHEL, Astra Linux/MosOS.</li>
+      <li>Разработка модульных ролей Ansible для конфигурации серверов, установки ПО и стандартизации окружений.</li>
+      <li>Настройка CI-пайплайнов в GitLab CI и Jenkins; управление Redis в высоконагруженных распределённых средах.</li>
+      <li>Построение алертинга и маршрутизации инцидентов через Prometheus + Alertmanager (методология USE); минимизация MTTR.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-header">
+      <div class="job-company">ФГАУ — Ресурсный центр при Минпромторге России</div>
+      <div class="job-period">Авг 2021 — Авг 2023</div>
+    </div>
+    <div class="job-role-line">
+      <span class="job-role">Ведущий инженер-программист (ML)</span>
+      <span class="job-duration">2 года 1 мес · Москва</span>
+    </div>
+    <ul>
+      <li>Python ML-разработчик в государственном исследовательском учреждении; применение методологий data science и data analysis.</li>
+      <li>Решение задач компьютерного зрения: сегментация изображений, классификация, OCR, super-resolution, детекция объектов.</li>
+      <li>Написание пайплайнов аннотации и обработки данных; разработка веб-приложения FastAPI + React для визуализации и автоматической разметки изображений.</li>
+      <li>Работа со специализированным инструментарием: QuPath, Matlab (работа с thumbnail медицинских препаратов), Deep Zoom (DZI) для предобработки и нарезки изображений, GeoJSON.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-title">Технические навыки</div>
+  <div class="skills-grid">
+
+    <div class="skill-label">Облака и ОС</div>
+    <div class="skill-tags">
+      <span class="tag">Yandex Cloud</span>
+      <span class="tag">AWS</span>
+      <span class="tag">Azure</span>
+      <span class="tag">RHEL</span>
+      <span class="tag">Ubuntu</span>
+      <span class="tag">SUSE</span>
+      <span class="tag">Astra Linux</span>
+    </div>
+
+    <div class="skill-label">Kubernetes</div>
+    <div class="skill-tags">
+      <span class="tag">Kubernetes (vanilla)</span>
+      <span class="tag">Kubeadm</span>
+      <span class="tag">Kubespray</span>
+      <span class="tag">Helm</span>
+      <span class="tag">ArgoCD</span>
+      <span class="tag">Istio</span>
+      <span class="tag">Nginx Ingress</span>
+      <span class="tag">Traefik</span>
+    </div>
+
+    <div class="skill-label">IaC и CI/CD</div>
+    <div class="skill-tags">
+      <span class="tag">Terraform</span>
+      <span class="tag">Ansible</span>
+      <span class="tag">AWX</span>
+      <span class="tag">GitLab CI/CD</span>
+      <span class="tag">Jenkins</span>
+      <span class="tag">GitHub Actions</span>
+    </div>
+
+    <div class="skill-label">Секреты и безопасность</div>
+    <div class="skill-tags">
+      <span class="tag">Vault (HA)</span>
+      <span class="tag">SOPS</span>
+      <span class="tag">ESO</span>
+      <span class="tag">SonarQube</span>
+      <span class="tag">Trivy</span>
+      <span class="tag">Harbor</span>
+      <span class="tag">Semgrep</span>
+      <span class="tag">Bandit</span>
+    </div>
+
+    <div class="skill-label">Контейнеры</div>
+    <div class="skill-tags">
+      <span class="tag">Docker</span>
+      <span class="tag">Docker Compose</span>
+      <span class="tag">Kaniko</span>
+      <span class="tag">kind</span>
+    </div>
+
+    <div class="skill-label">Наблюдаемость</div>
+    <div class="skill-tags">
+      <span class="tag">Prometheus</span>
+      <span class="tag">Grafana</span>
+      <span class="tag">Alertmanager</span>
+      <span class="tag">VictoriaMetrics</span>
+      <span class="tag">ELK Stack</span>
+      <span class="tag">Graylog</span>
+      <span class="tag">Zabbix</span>
+      <span class="tag">USE/RED</span>
+    </div>
+
+    <div class="skill-label">Базы данных</div>
+    <div class="skill-tags">
+      <span class="tag">PostgreSQL</span>
+      <span class="tag">MongoDB</span>
+      <span class="tag">Redis</span>
+      <span class="tag">ClickHouse</span>
+      <span class="tag">RabbitMQ</span>
+      <span class="tag">MySQL</span>
+    </div>
+
+    <div class="skill-label">MLOps</div>
+    <div class="skill-tags">
+      <span class="tag">Kubeflow</span>
+      <span class="tag">ClearML</span>
+      <span class="tag">GPU cluster management</span>
+    </div>
+
+    <div class="skill-label">Языки программирования</div>
+    <div class="skill-tags">
+      <span class="tag">Python</span>
+      <span class="tag">Go</span>
+      <span class="tag">Bash</span>
+      <span class="tag">Groovy</span>
+      <span class="tag">Rust (поддержка)</span>
+      <span class="tag">Node.js (поддержка)</span>
+    </div>
+
+  </div>
+</section>
+
+<div class="two-col">
+  <section class="section">
+    <div class="section-title">Образование</div>
+    <div class="edu-item">
+      <div class="edu-school">Московский энергетический институт (НИУ МЭИ)</div>
+      <div class="edu-degree">Информационная безопасность — Инженерно-экономический факультет</div>
+      <div class="edu-year">2019 – 2022 (Неоконченное высшее — вышел на рынок труда)</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">Языки</div>
+    <div class="lang-item">
+      <span>Русский</span>
+      <span class="lang-level">Родной</span>
+    </div>
+    <div class="lang-item">
+      <span>Английский</span>
+      <span class="lang-level">B2 — Средне-продвинутый</span>
+    </div>
+  </section>
+</div>
+
+</body>
+</html>

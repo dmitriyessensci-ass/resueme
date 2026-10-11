@@ -1,0 +1,12 @@
+.git
+.gitignore
+.claude
+.env
+Makefile
+*.pdf
+*.md
+__pycache__
+*.pyc
+*.pyo
+resueme-hh.pdf.pdf
+resueme-linkedin.pdf
